@@ -7,15 +7,17 @@
 <body>
 <div th:each="user : ${users}">
     <a th:text="${user.getName()}" th:href="@{/users(id=${user.getId()})}">user</a>
-    <form method="GET" action="/users/edit">
+    <form method="GET" action ="/users/edit">
+        <input type="hidden" name="id" th:value="${user.getId()}">
         <input type="submit" value="EDIT USER DATA">
     </form>
-    <form method="GET" action="users/delete">
+    <form method="GET" action ="/users/delete">
+        <input type="hidden" name="id" th:value="${user.getId()}">
         <input type="submit" value="DELETE USER">
     </form>
 </div>
 </br>
-<form action="#" method="GET" th:action="/users/new">
+<form  method="GET" action="/users/new" >
     <input type = "submit" value="CREATE NEW USER!">
 </form>
 </body>

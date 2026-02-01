@@ -37,4 +37,8 @@ public class UserDao {
         User user2Upd = getUser(id);
         user2Upd.setName(user.getName());
     }
+    public void delete(int id) {
+        User user2del = getUser(id);
+        this.users.remove(user2del);
+    }
 }

@@ -34,8 +34,17 @@ public class UsersController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute("user") User user) {
-        userDao.save(user);
+    public String put(@ModelAttribute("user") User user, @RequestParam(name="id", required = false) Integer id,
+                      @RequestParam(name="delete", required = false) boolean delete) {
+        if (id == null) {
+            userDao.save(user);
+        } else {
+            if (delete) {
+                userDao.delete(id);
+            } else {
+                userDao.update(id, user);
+            }
+        }
         return "redirect:/users";
     }
     @GetMapping("/edit")
@@ -44,8 +53,14 @@ public class UsersController {
         return "users/edit";
     }
 
+    @GetMapping("/delete")
+    public String delete(Model model, @RequestParam(name="id") int id) {
+        model.addAttribute("user", userDao.getUser(id));
+        return "users/delete";
+    }
+
 //    @PostMapping
-//    public String update(@RequestParam(name="id") int id,
+//    public String update(Model model, @RequestParam(name="id") int id,
 //                         @ModelAttribute("user") User user) {
 //        userDao.update(id, user);
 //        return "redirect/users";
