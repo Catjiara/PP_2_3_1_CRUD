@@ -1,12 +1,13 @@
 package ru.catjiara.pp231crud.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.catjiara.pp231crud.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class UserDao {
     private static int cnt;
     private List<User> users ;

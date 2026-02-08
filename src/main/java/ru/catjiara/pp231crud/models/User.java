@@ -1,8 +1,15 @@
 package ru.catjiara.pp231crud.models;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String name;
+    @Column(name = "name")
+    private String name;
 
     public User() {;}
     public User(int id, String name) {
