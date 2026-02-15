@@ -1,5 +1,5 @@
 package ru.catjiara.pp231crud.models;
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="users")
