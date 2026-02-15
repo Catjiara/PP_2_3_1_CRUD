@@ -2,7 +2,7 @@ package ru.catjiara.pp231crud.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name="users")
 public class User {
 
     @Id
