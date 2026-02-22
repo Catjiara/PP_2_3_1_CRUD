@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.catjiara.pp231crud.dao.UserDao;
+import ru.catjiara.pp231crud.dao.IUserDao;
 import ru.catjiara.pp231crud.models.User;
 
 @Controller
 @RequestMapping("/users")
 public class UsersController {
 
-    private UserDao userDao;
+    private IUserDao userDao;
 
     @Autowired
-    public UsersController(UserDao userDao) {
+    public UsersController(IUserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -58,11 +58,4 @@ public class UsersController {
         model.addAttribute("user", userDao.getUser(id));
         return "users/delete";
     }
-
-//    @PostMapping
-//    public String update(Model model, @RequestParam(name="id") int id,
-//                         @ModelAttribute("user") User user) {
-//        userDao.update(id, user);
-//        return "redirect/users";
-//    }
 }
