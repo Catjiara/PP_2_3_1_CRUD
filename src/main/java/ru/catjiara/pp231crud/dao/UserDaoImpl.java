@@ -3,14 +3,12 @@ package ru.catjiara.pp231crud.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import ru.catjiara.pp231crud.models.User;
 
 import java.util.List;
 
 @Repository
-@Transactional
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
@@ -35,9 +33,9 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void update(int id, User user) {
-        User user2Upd = getUser(id);
-        user2Upd.setName(user.getName());
-        entityManager.merge(user2Upd);
+        User updatedUser = getUser(id);
+        updatedUser.setName(user.getName());
+        entityManager.merge(updatedUser);
     }
 
     @Override
