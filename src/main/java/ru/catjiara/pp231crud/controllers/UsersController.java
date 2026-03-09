@@ -33,33 +33,38 @@ public class UsersController {
     }
 
     @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") User user){
+    public String create(@ModelAttribute("user") User user){
         return "users/new";
     }
 
-    @PostMapping
-    public String put(@ModelAttribute("user") User user, @RequestParam(name="id", required = false) Integer id,
-                      @RequestParam(name="delete", required = false) boolean delete) {
-        if (id == null) {
-            userService.save(user);
-        } else {
-            if (delete) {
-                userService.delete(id);
-            } else {
-                userService.update(id, user);
-            }
-        }
+    @PostMapping("/doCreate")
+    public String doCreate(@ModelAttribute("user") User user) {
+        userService.save(user);
         return "redirect:/users";
     }
-    @GetMapping("/edit")
-    public String edit(Model model, @RequestParam(name="id") int id) {
-        model.addAttribute("user", userService.getUser(id));
-        return "users/edit";
-    }
-
     @GetMapping("/delete")
     public String delete(Model model, @RequestParam(name="id") int id) {
         model.addAttribute("user", userService.getUser(id));
         return "users/delete";
     }
+
+    @PostMapping("/doDelete")
+    public String doDelete(@ModelAttribute("user") User user, @RequestParam(name="id", required = true) Integer id) {
+            userService.delete(id);
+        return "redirect:/users";
+    }
+    @GetMapping("/edit")
+    public String update(Model model, @RequestParam(name="id") int id) {
+        model.addAttribute("user", userService.getUser(id));
+        return "users/edit";
+    }
+    @PostMapping("/doUpdate")
+    public String doUpdate(@ModelAttribute("user") User user, @RequestParam(name="id", required = true) Integer id) {
+        userService.update(id, user);
+        return "redirect:/users";
+    }
+
+
+
+
 }
